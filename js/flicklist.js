@@ -2,8 +2,8 @@
 
 var model = {
   watchlistItems: [],
-  browseItems: []
-}
+  browseItems: [],
+};
 
 
 var api = {
@@ -20,7 +20,7 @@ var api = {
     var baseImageUrl = "http://image.tmdb.org/t/p/w300/";
     return baseImageUrl + movie.poster_path; 
   }
-}
+};
 
 
 /**
@@ -77,11 +77,12 @@ function render() {
   // insert watchlist items
   model.watchlistItems.forEach(function(movie) {
     var title = $("<h6></h6>")
-      .text(movie.original_title);
-
+    .text(movie.original_title);
+    
     var panelHeading = $("<div></div>")
-      .attr("class", "panel-heading")
+      .atr("class", "panel-heading")
       .append(title);
+
     // TODO 1 
     // add an "I watched it" button and append it below the title
     // Clicking should remove this movie from the watchlist and re-render
@@ -89,23 +90,31 @@ function render() {
       .text("I watched it")
       .attr("class", "btn btn-danger")
       .click(function() {
-        
-  var index = model.watchlistItems.indexOf(movie);
-      model.watchlistItems.splice(index, 1);
-      
-      render();
+        // remove this movie from the model.watchlistItems
+        var index = model.watchlistItems.indexOf(movie);
+        model.watchlistItems.splice(index, 1);
+        // re-render
+        render();
       });
       
-      var poster = $("<img></img>")
-      .attr("src", api.posterUrl(movie))
-      .attr("class", "img-responsive");
-    
-    var panelBody = $("<div></div>")
-      .attr("class", "panel-body")
-      .append(poster)
-      .append(button);
-      
+  
+  
+  
+  
+  
+  
+  
+  
+  var poster = $("<img></img>")
+    .attr("src", api.posterUrl(movie))
+    .attr("class", "img-responsive");
 
+  var panelBody = $("<div></div>")
+    .attr("class", "panel-body")
+    .append(poster)
+    .append(button);
+    
+    
     // TODO 2g (DONE)
     // re-implement the li as a bootstrap panel with a heading and a body
     var itemView = $("<li></li>")
@@ -133,7 +142,7 @@ function render() {
         model.watchlistItems.push(movie);
         render();
       })
-      .prop("disabled", model.watchlistItems.indexOf(movie) !== -1);
+      .prop("disabled", model.watchlistItems.indexOf(movie) !== -1)
       .attr("class", "btn btn-primary");
       
     var overview = $("<p></p>").text(movie.overview);
@@ -142,7 +151,8 @@ function render() {
     var itemView = $("<li></li>")
       .append(title)
       .append(overview)
-      .append(button);
+      .append(button)
+      .attr("class", "list-group-item");
       
     // append the itemView to the list
     $("#section-browse ul").append(itemView);
@@ -153,6 +163,3 @@ function render() {
 
 // When the HTML document is ready, we call the discoverMovies function,
 // and pass the render function as its callback
-$(document).ready(function() {
-  discoverMovies(render);
-});
