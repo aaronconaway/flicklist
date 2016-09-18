@@ -98,13 +98,6 @@ function render() {
       });
       
   
-  
-  
-  
-  
-  
-  
-  
   var poster = $("<img></img>")
     .attr("src", api.posterUrl(movie))
     .attr("class", "img-responsive");
